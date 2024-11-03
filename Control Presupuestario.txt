@@ -1,0 +1,32 @@
+EXPLICACIÓN DEL INFORME: 
+El informe, partiendo de unos presupuestos de gastos y unas previsiones de ingresos del año 2019 y 2020 y sus respectivos Ingresos y gastos reales. Evalúa mediante medidores y KPIs como irían evolucionando los Ingresos, Gastos, Beneficios anualmente respecto a sus correspondientes Previsiones y Presupuesto, por tanto miden sus acumulados anuales por mes y año. Además existe una visualización mensual.
+Los ‘Gauces’ al igual que sus Kpis miden la dimensión (Ingreso, Gasto, Beneficio) respecto a su evolución anual acumulada.
+A partir de la página principal y a través de botones de navegación, ya sea sobre la visualización o debajo sobre el nombre de la dimensión tratada, se puede acceder a más detalle de Ingresos y/o segmentar por tipo de ingreso ‘Online’ o ‘Tienda’ y profundizar más; También para Gastos y según el tipo o tipos (con tecla Ctr para más de uno) de gasto seleccionado; O bien para los Beneficios, pudiendo ver al final  una cuenta de resultados, seleccionable por mes y año.
+FUENTE DE DATOS: Hipotética.
+ESTRUCTURA DEL INFORME Y MODELO SEMÁNTICO:
+Modelo sencillo que relaciona tablas Presupuestarias (PRESUPUESTOS-OBJETIVOS) con otras Reales (Finanzas) a través de Tabla calendario para establecer tipos de fecha adecuada y relacionar ambas tablas, así como Categorías de gastos, sin ninguna mención especial.
+VISUALIZACIONES: Varias
+MEDIDAS DAX:
+1.	FINANZAS = SUM(Finanzas[Cantidad])
+2.	PRESUPUESTOS_OBJETIVOS = SUM(Objetivos[Cantidad])
+3.	Ingresos = CALCULATE([FINANZAS],Finanzas[Tipo]="Ingresos")
+4.	Gastos = CALCULATE([FINANZAS], Finanzas[Tipo]="Gastos")
+5.	Beneficios = [Ingresos]-[Gastos]
+6.	Prevision Ingresos = CALCULATE([PRESUPUESTOS_OBJETIVOS], Objetivos[Tipo]="Previsión_Ingresos")
+7.	Presupuesto = CALCULATE( [PRESUPUESTOS_OBJETIVOS], Objetivos[Tipo]= "PresupuestoGastos")
+8.	Beneficios Previstos = [Prevision Ingresos]-[Presupuesto]
+9.	Ingresos YTD = TOTALYTD([Ingresos],Calendarios[Fecha])
+10.	Gastos YTD = TOTALYTD([Gastos],Calendarios[Fecha])
+11.	Beneficios YTD = TOTALYTD([Beneficios],Calendarios[Fecha]) 
+12.	Prev ingres YTD = TOTALYTD([Prevision Ingresos],Calendarios[Fecha])
+13.	Presupuestos YTD = TOTALYTD([Presupuesto],Calendarios[Fecha])
+14.	Beneficio Previsto YTD = TOTALYTD([Beneficios Previstos], Calendarios[Fecha])
+
+
+
+
+
+
+
+
+
